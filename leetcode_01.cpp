@@ -2,22 +2,23 @@
 
 #include<iostream>
 #include<vector>
-#include<algorithm>
+#include<unordered_map>
 using namespace std;
 
 
 class Solution {
 public:
-    int findMaxConsecutiveOnes(vector<int>& nums) {
-        int max_count = 0, count = 0;
-        for(int i=0; i < nums.size(); i++){
-            if(nums[i] == 1){
-                count++;
-                max_count = max(count, max_count);
-            }else{
-                count = 0;
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> mp;
+        for(int i = 0; i<nums.size(); i++){
+            int need = target - nums[i];
+
+            if(mp.find(need) != mp.end()){
+                return {mp[need], i};
             }
+            mp[nums[i]] = i;
         }
-        return max_count;
+        return {};
+        
     }
 };
